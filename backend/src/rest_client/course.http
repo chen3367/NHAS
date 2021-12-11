@@ -6,10 +6,12 @@ GET http://localhost:8888/v1/courses/61b43ecb401c11bb636d2c44
 
 ###
 
+// get courses info by class
 GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/courses
 
 ###
 
+// get courses info by class/date
 GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/date/20211201/courses
 
 ###
@@ -27,9 +29,13 @@ Content-Type: application/json
 }
 
 ###
-PUT　http://localhost:8888/v1/courses/61b440c232b8fd282c9fcfd0
+PUT　http://localhost:8888/v1/courses/61b43ecb401c11bb636d2c44
 Content-Type: application/json
 
 {
     "date": "20220110"
 }
+
+###
+
+DELETE http://localhost:8888/v1/courses/61b43ecb401c11bb636d2c44

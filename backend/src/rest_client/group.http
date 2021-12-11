@@ -2,7 +2,7 @@ GET http://localhost:8888/v1/groups
 
 ###
 
-GET http://localhost:8888/v1/groups/61b421322aaa8efd0d9f8a81
+GET http://localhost:8888/v1/groups/61b4427d8521a92aa5990cab
 
 ###
 
@@ -16,4 +16,13 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8888/v1/groups/61b421322aaa8efd0d9f8a81
+PUT　http://localhost:8888/v1/groups/61b4427d8521a92aa5990cab
+Content-Type: application/json
+
+{
+    "className": "21.12"
+}
+
+###
+
+DELETE http://localhost:8888/v1/groups/61b4427d8521a92aa5990cab

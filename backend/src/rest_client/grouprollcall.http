@@ -2,10 +2,11 @@ GET http://localhost:8888/v1/grouprollcalls
 
 ###
 
-GET http://localhost:8888/v1/grouprollcalls/61b447a50cbcbb032cd55cda
+GET http://localhost:8888/v1/grouprollcalls/61b45a9f308af7539ca03475
 
 ###
 
+// get groups roll call info by class/date/course
 GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/date/20211201/courses/61b43ecb401c11bb636d2c44/grouprollcalls
 
 ###
@@ -23,12 +24,12 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8888/v1/grouprollcalls/61b45acc308af7539ca03478
+PUT http://localhost:8888/v1/grouprollcalls/61b45a9f308af7539ca03475
 Content-Type: application/json
 
 {
-    "date": "20211201"
+    "groupStatus": "green"
 }
 ###
 
-DELETE http://localhost:8888/v1/grouprollcalls/61b45a4b51835ff93d1a9152
+DELETE http://localhost:8888/v1/grouprollcalls/61b45a9f308af7539ca03475

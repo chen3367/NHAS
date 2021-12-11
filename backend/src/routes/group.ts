@@ -11,7 +11,8 @@ const GroupsResponse = Type.Object({
         Type.Object({
             _id: Type.String(),
             className: Type.String(),  
-            groupName: Type.String()
+            groupName: Type.String(),
+            groupLeader: Type.String()
         })
     )
 })
@@ -20,7 +21,8 @@ const GroupResponse = Type.Object({
     group: Type.Object({
         _id: Type.String(),
         className: Type.String(),  
-        groupName: Type.String()
+        groupName: Type.String(),
+        groupLeader: Type.String()
     })
 })
 

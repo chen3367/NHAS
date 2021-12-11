@@ -8,6 +8,9 @@ const groupSchema: Schema = new Schema(
         },
         groupName: {
             type: String
+        },
+        groupLeader: {
+            type: String
         }
     },
     {

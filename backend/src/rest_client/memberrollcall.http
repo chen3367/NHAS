@@ -6,9 +6,8 @@ GET http://localhost:8888/v1/memberrollcalls/61b447a50cbcbb032cd55cda
 
 ###
 
+// get members roll call info by class/date/course/group
 GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/date/20211201/courses/61b43ecb401c11bb636d2c44/groups/61b4427d8521a92aa5990cab/memberrollcalls
-
-
 
 ###
 

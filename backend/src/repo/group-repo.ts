@@ -27,13 +27,7 @@ class GroupRepoImpl {
   async getGroup(group_id: string): Promise<IGroup | null> {
     return Group.findById(group_id)
   }
-
-  // async getGroupsByClass(className: string): Promise<IGroup | null> {
-  //   return Group.find({
-  //     className: className
-  //   })
-  // }
-
+  
 }
  
 export { GroupRepoImpl }
