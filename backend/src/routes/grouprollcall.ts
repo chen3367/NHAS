@@ -107,7 +107,11 @@ const GroupRollCallRouter = (server: FastifyInstance, opts: RouteShorthandOption
             }
             
             const grouprollcalls = await grouprollcallRepo.getGroupRollCallsByParams(className!, date, courseName!)
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 2ab30ef4e50b9c08d7b121d6ba0bf117782ee4cd
             if (grouprollcalls) {
                 for (let i = 0; i < grouprollcalls.length; i++){
                     const groupName = grouprollcalls[i].groupName
