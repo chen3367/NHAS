@@ -1,0 +1,34 @@
+GET http://localhost:8888/v1/grouprollcalls
+
+###
+
+GET http://localhost:8888/v1/grouprollcalls/61b447a50cbcbb032cd55cda
+
+###
+
+GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/date/20211201/courses/61b43ecb401c11bb636d2c44/grouprollcalls
+
+###
+
+POST http://localhost:8888/v1/grouprollcalls
+Content-Type: application/json
+
+{
+    "className": "21.11",
+    "date": "20121201",
+    "courseName": "UI/UX",
+    "groupName": "WPTSD",
+    "groupStatus": "grey"
+}
+
+###
+
+PUT http://localhost:8888/v1/grouprollcalls/61b45acc308af7539ca03478
+Content-Type: application/json
+
+{
+    "date": "20211201"
+}
+###
+
+DELETE http://localhost:8888/v1/grouprollcalls/61b45a4b51835ff93d1a9152

@@ -1,0 +1,18 @@
+GET http://localhost:8888/v1/classes
+
+###
+
+GET http://localhost:8888/v1/classes/61b421322aaa8efd0d9f8a81
+
+###
+
+POST　http://localhost:8888/v1/classes
+Content-Type: application/json
+
+{
+    "className": "21.11"
+}
+
+###
+
+DELETE http://localhost:8888/v1/classes/61b421322aaa8efd0d9f8a81

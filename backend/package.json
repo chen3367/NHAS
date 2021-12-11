@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"tsc -w \" \"nodemon out/index.js\"",
+    "build": "tsc",
+    "start": "node out/index.js",
+    "fix-prettier": "prettier --write \"./{src,test,examples,scripts}/**/*.ts\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sinclair/typebox": "^0.22.1",
+    "dotenv": "^10.0.0",
+    "fastify": "^3.24.0",
+    "mongoose": "^6.0.13",
+    "pino-pretty": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^16.11.10",
+    "concurrently": "^6.4.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.0",
+    "typescript": "^4.5.2"
+  }
+}

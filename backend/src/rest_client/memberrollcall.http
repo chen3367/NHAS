@@ -1,0 +1,40 @@
+GET http://localhost:8888/v1/memberrollcalls
+
+###
+
+GET http://localhost:8888/v1/memberrollcalls/61b447a50cbcbb032cd55cda
+
+###
+
+GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/date/20211201/courses/61b43ecb401c11bb636d2c44/groups/61b4427d8521a92aa5990cab/memberrollcalls
+
+
+
+###
+
+POST http://localhost:8888/v1/memberrollcalls
+Content-Type: application/json
+
+{
+    "className": "21.11",
+    "date": "20121202",
+    "courseName": "Mern frontend",
+    "groupName": "WPTSD",
+    "eID": "126486",
+    "memberName": "蘇品瑜",
+    "status": "grey",
+    "reason": ""
+}
+
+###
+
+PUT http://localhost:8888/v1/memberrollcalls/61b447b90cbcbb032cd55cde
+Content-Type: application/json
+
+{
+    "date": "20211202"
+}
+
+###
+
+DELETE http://localhost:8888/v1/memberrollcalls/61b448840cbcbb032cd55ce1

@@ -1,0 +1,19 @@
+GET http://localhost:8888/v1/groups
+
+###
+
+GET http://localhost:8888/v1/groups/61b421322aaa8efd0d9f8a81
+
+###
+
+POST　http://localhost:8888/v1/groups
+Content-Type: application/json
+
+{
+    "className": "21.12",
+    "groupName": "Lion"
+}
+
+###
+
+DELETE http://localhost:8888/v1/groups/61b421322aaa8efd0d9f8a81

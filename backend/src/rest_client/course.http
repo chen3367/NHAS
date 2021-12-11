@@ -1,0 +1,35 @@
+GET http://localhost:8888/v1/courses
+
+###
+
+GET http://localhost:8888/v1/courses/61b43ecb401c11bb636d2c44
+
+###
+
+GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/courses
+
+###
+
+GET http://localhost:8888/v1/classes/61b43ebf401c11bb636d2c41/date/20121201/courses
+
+###
+
+POST　http://localhost:8888/v1/courses
+Content-Type: application/json
+
+{
+    "className": "21.12",
+    "date": "20130110",
+    "courseName": "UI/UX",
+    "lecturer": "Gwynne",
+    "startTime": "13:00",
+    "endTime": "15:00"
+}
+
+###
+PUT　http://localhost:8888/v1/courses/61b440c232b8fd282c9fcfd0
+Content-Type: application/json
+
+{
+    "date": "20220110"
+}

@@ -1,0 +1,28 @@
+GET http://localhost:8888/ping
+
+### 
+
+GET http://localhost:8888/v1/classes
+
+###
+
+POST http://localhost:8888/v1/classes
+content-type: application/json
+
+{
+    "name": "21.11",
+    "leader": "逯仲倫"
+}
+
+###
+
+PUT http://localhost:8888/v1/classes/61a247c57b974c57cb7d259c
+content-type: application/json
+
+{
+    "name": "21.12"
+}
+
+###
+
+DELETE http://localhost:8888/v1/classes/61a2482473115aaf7ddddffe
