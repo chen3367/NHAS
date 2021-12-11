@@ -107,10 +107,6 @@ const GroupRollCallRouter = (server: FastifyInstance, opts: RouteShorthandOption
             }
             
             const grouprollcalls = await grouprollcallRepo.getGroupRollCallsByParams(className!, date, courseName!)
-            grouprollcalls!.forEach(async function(item) {
-                const groupName = item.groupName
-                const members = await memberrollcallRepo.getMemberRollCallsByParams(className!, date, courseName!, groupName)
-            })
 
             if (grouprollcalls) {
                 return reply.status(200).send( { grouprollcalls } )
