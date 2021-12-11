@@ -20,6 +20,9 @@ const courseSchema: Schema = new Schema(
         },
         endTime: {
             type: String
+        },
+        groups: {
+            type: Array
         }
     },
     {
