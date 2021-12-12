@@ -18,6 +18,10 @@ const grouprollcallSchema: Schema = new Schema(
         groupStatus: {
             type: String
         },
+        numAttend: {
+            type: String,
+            default: '0/0'
+        },
         members: {
             type: Array
         }

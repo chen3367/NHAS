@@ -13,6 +13,7 @@ interface IGroupRollCall extends Document{
     courseName: string
     groupName: string
     groupStatus: string
+    numAttend?: string
     members: Array<IMemberRollCall>
 }
 

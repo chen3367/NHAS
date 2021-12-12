@@ -8,7 +8,6 @@ import { MemberRollCallRepoImpl } from '../repo/memberrollcall-repo'
 
 import { Types } from 'mongoose'
 import { Type, Static, TypeBuilder } from '@sinclair/typebox'
-import memberrollcall from '../models/memberrollcall'
 
 const CoursesResponse = Type.Object({
     courses: Type.Array(
@@ -68,8 +67,40 @@ const CourseResponse = Type.Object({
     })
 })
 
+const AttendanceResponse = Type.Object({
+    courses: Type.Array(
+        Type.Object({
+            _id: Type.String(),
+            className: Type.String(),  
+            date: Type.String(),
+            courseName: Type.String(),
+            lecturer: Type.String(),
+            startTime: Type.String(),
+            endTime: Type.String(),
+            groups: Type.Array(
+                Type.Object({
+                    _id: Type.String(),
+                    groupName: Type.String(),
+                    groupStatus: Type.String(),
+                    createdAt: Type.String(),
+                    numAttend: Type.String(),
+                    members: Type.Array(
+                        Type.Object({
+                            eID: Type.String(),
+                            memberName: Type.String(),
+                            status: Type.String(),
+                            reason: Type.String()
+                        })
+                    )
+                })
+            )
+        })
+    )
+})
+
 type CoursesResponse = Static<typeof CoursesResponse>
 type CourseResponse = Static<typeof CourseResponse>
+type AttendanceResponse = Static<typeof AttendanceResponse>
  
 const CourseRouter = (server: FastifyInstance, opts: RouteShorthandOptions, done: (error?: Error) => void) => { 
 
@@ -123,7 +154,7 @@ const CourseRouter = (server: FastifyInstance, opts: RouteShorthandOptions, done
         }
     })
 
-    server.get<{ Params: Params }>('/classes/:class_id/date/:date/courses', { ...opts, schema: { response: { 200: CoursesResponse } } }, async (request, reply) => {
+    server.get<{ Params: Params }>('/classes/:class_id/date/:date/courses', { ...opts, schema: { response: { 200: AttendanceResponse } } }, async (request, reply) => {
         const classRepo = ClassRepoImpl.of()
         const courseRepo = CourseRepoImpl.of()
         const grouprollcallRepo = GroupRollCallRepoImpl.of()
@@ -150,7 +181,15 @@ const CourseRouter = (server: FastifyInstance, opts: RouteShorthandOptions, done
                             const groupName = groups[j].groupName
                             const members = await memberrollcallRepo.getMemberRollCallsByParams(className, date, courseName, groupName)
                             if (members) {
+                                let num_attend: number = 0
                                 groups[j].members = members
+                                members.forEach(function(item) {
+                                    if (item.status === 'green') {
+                                        num_attend += 1
+                                    }
+                                })
+                                const num_total = members.length
+                                groups[j].numAttend = num_attend + '/' + num_total
                             }
                         }
                         courses[i].groups = groups
