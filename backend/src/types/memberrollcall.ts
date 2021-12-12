@@ -1,4 +1,6 @@
-interface IMemberRollCall {
+import { Document } from 'mongoose' 
+
+interface IMemberRollCall extends Document {
     className: string
     date: string
     courseName: string

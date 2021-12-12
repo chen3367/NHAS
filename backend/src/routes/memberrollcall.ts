@@ -83,24 +83,24 @@ const MemberRollCallRouter = (server: FastifyInstance, opts: RouteShorthandOptio
             const course_id = request.params.course_id
             const group_id = request.params.group_id
 
+            if (!(Types.ObjectId.isValid(class_id) && Types.ObjectId.isValid(course_id) && Types.ObjectId.isValid(group_id))) {
+                return reply.status(400).send({ msg: `Invalid id` })
+            }
+
             const classBody = await classRepo.getClass(class_id)
             const courseBody = await courseRepo.getCourse(course_id)
             const groupBody = await groupRepo.getGroup(group_id)
 
-            const className = classBody?.className
-            const courseName = courseBody?.courseName
-            const groupName = groupBody?.groupName
-
-            if (!Types.ObjectId.isValid(class_id)) {
-                return reply.status(400).send({ msg: `Invalid id` })
+            if (!(classBody && courseBody && groupBody)) {
+                return reply.status(404).send({ msg: `ID Not Found` })
             }
-            const memberrollcalls = await memberrollcallRepo.getMemberRollCallsByParams(className!, date, courseName!, groupName!)
 
-            if (memberrollcalls) {
-                return reply.status(200).send( { memberrollcalls } )
-            } else {
-                return reply.status(404).send({ msg: `Class #${class_id} Not Found` })
-            }
+            const className = classBody.className
+            const courseName = courseBody.courseName
+            const groupName = groupBody.groupName
+            const memberrollcalls = await memberrollcallRepo.getMemberRollCallsByParams(className, date, courseName, groupName)
+
+            return reply.status(200).send( { memberrollcalls } )
         } catch (error) {
             return reply.status(500).send({ msg: error })
         }
@@ -111,7 +111,6 @@ const MemberRollCallRouter = (server: FastifyInstance, opts: RouteShorthandOptio
         try {
             const memberrollcallBody = request.body
             const memberrollcall = await memberrollcallRepo.addMemberRollCall(memberrollcallBody)
-            console.log(memberrollcall)
             return reply.status(201).send({ memberrollcall })
         } catch (error) {
             return reply.status(500).send({ msg: `Internal Server Error: ${error}` })

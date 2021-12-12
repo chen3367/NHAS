@@ -1,3 +1,5 @@
+import { Document } from 'mongoose'
+
 interface IMemberRollCall {
     eID: string
     memberName: string
@@ -5,7 +7,7 @@ interface IMemberRollCall {
     reason: string
 }
 
-interface IGroupRollCall {
+interface IGroupRollCall extends Document{
     className: string
     date: string
     courseName: string

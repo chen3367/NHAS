@@ -94,28 +94,29 @@ const CourseRouter = (server: FastifyInstance, opts: RouteShorthandOptions, done
                 return reply.status(400).send({ msg: `Invalid id` })
             }
             const _class = await classRepo.getClass(class_id)
-            const className = _class?.className
-            const courses = await courseRepo.getCoursesByClass(className!)
+            if (!_class) {
+                return reply.status(404).send({ msg: `Class #${class_id} Not Found` })
+            }
+            const className = _class.className
+            const courses = await courseRepo.getCoursesByClass(className)
             if (courses) {
                 for (let i = 0; i < courses.length; i++) {
                     const date = courses[i].date
                     const courseName = courses[i].courseName
-                    const groups = await grouprollcallRepo.getGroupRollCallsByParams(className!, date, courseName)
+                    const groups = await grouprollcallRepo.getGroupRollCallsByParams(className, date, courseName)
                     if (groups) {
                         for (let j = 0; j < groups.length; j++) {
                             const groupName = groups[j].groupName
-                            const members = await memberrollcallRepo.getMemberRollCallsByParams(className!, date, courseName, groupName)
+                            const members = await memberrollcallRepo.getMemberRollCallsByParams(className, date, courseName, groupName)
                             if (members) {
                                 groups[j].members = members
                             }
                         }
                         courses[i].groups = groups
                     }
-                }
-                return reply.status(200).send({ courses })
-            } else {
-                return reply.status(404).send({ msg: `Class #${class_id} Not Found` })
+                }                
             }
+            return reply.status(200).send({ courses })
             
         } catch (error) {
             return reply.status(500).send({ msg: `Internal Server Error: ${error}` })
@@ -134,17 +135,20 @@ const CourseRouter = (server: FastifyInstance, opts: RouteShorthandOptions, done
                 return reply.status(400).send({ msg: `Invalid id` })
             }
             const _class = await classRepo.getClass(class_id)
-            const className = _class?.className
-            const courses = await courseRepo.getCoursesByParams(className!, date)
+            if (!_class) {
+                return reply.status(404).send({ msg: `Class #${class_id} Not Found` })
+            }
+            const className = _class.className
+            const courses = await courseRepo.getCoursesByParams(className, date)
             if (courses) {
                 for (let i = 0; i < courses.length; i++) {
                     const date = courses[i].date
                     const courseName = courses[i].courseName
-                    const groups = await grouprollcallRepo.getGroupRollCallsByParams(className!, date, courseName)
+                    const groups = await grouprollcallRepo.getGroupRollCallsByParams(className, date, courseName)
                     if (groups) {
                         for (let j = 0; j < groups.length; j++) {
                             const groupName = groups[j].groupName
-                            const members = await memberrollcallRepo.getMemberRollCallsByParams(className!, date, courseName, groupName)
+                            const members = await memberrollcallRepo.getMemberRollCallsByParams(className, date, courseName, groupName)
                             if (members) {
                                 groups[j].members = members
                             }
@@ -152,10 +156,8 @@ const CourseRouter = (server: FastifyInstance, opts: RouteShorthandOptions, done
                         courses[i].groups = groups
                     }
                 }
-                return reply.status(200).send({ courses })
-            } else {
-                return reply.status(404).send({ msg: `Class #${class_id} Not Found` })
             }
+            return reply.status(200).send({ courses })
             
         } catch (error) {
             return reply.status(500).send({ msg: `Internal Server Error: ${error}` })

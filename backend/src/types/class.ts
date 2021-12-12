@@ -1,4 +1,6 @@
-interface IClass {
+import { Document } from 'mongoose'
+
+interface IClass extends Document {
     className: string
 }
 

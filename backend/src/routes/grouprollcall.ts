@@ -96,27 +96,29 @@ const GroupRollCallRouter = (server: FastifyInstance, opts: RouteShorthandOption
             const course_id = request.params.course_id
             const date = request.params.date
 
+            if (!(Types.ObjectId.isValid(class_id) && Types.ObjectId.isValid(course_id))) {
+                return reply.status(400).send({ msg: `Invalid id` })
+            }
+
             const classBody = await classRepo.getClass(class_id)
             const courseBody = await courseRepo.getCourse(course_id)
 
-            const className = classBody?.className
-            const courseName = courseBody?.courseName
-
-            if (!Types.ObjectId.isValid(class_id)) {
-                return reply.status(400).send({ msg: `Invalid id` })
+            if (!(classBody && courseBody)) {
+                return reply.status(404).send({ msg: `ID Not Found` })
             }
+
+            const className = classBody.className
+            const courseName = courseBody.courseName
             
-            const grouprollcalls = await grouprollcallRepo.getGroupRollCallsByParams(className!, date, courseName!)
+            const grouprollcalls = await grouprollcallRepo.getGroupRollCallsByParams(className, date, courseName)
             if (grouprollcalls) {
                 for (let i = 0; i < grouprollcalls.length; i++) {
                     const groupName = grouprollcalls[i].groupName
-                    const members = await memberrollcallRepo.getMemberRollCallsByParams(className!, date, courseName!, groupName)
+                    const members = await memberrollcallRepo.getMemberRollCallsByParams(className, date, courseName, groupName)
                     grouprollcalls[i].members = members!
                 }
-                return reply.status(200).send( { grouprollcalls } )
-            } else {
-                return reply.status(404).send({ msg: `Class #${class_id} Not Found` })
-            }
+            } 
+            return reply.status(200).send( { grouprollcalls } )
         } catch (error) {
             return reply.status(500).send({ msg: error })
         }
